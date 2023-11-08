@@ -20,6 +20,7 @@ class CustomTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return TextFormField(
+      style: TextStyle(color: theme.colorScheme.primary),
       obscureText: isObsecure,
       textInputAction: textInputAction,
       controller: controller,

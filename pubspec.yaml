@@ -42,7 +42,11 @@ dependencies:
   lottie: ^2.7.0
   image_picker: ^1.0.4
   firebase_core: ^2.21.0
+  cloud_firestore: ^4.12.2
+  firebase_auth: ^4.12.1
+  firebase_storage: ^11.4.1
   
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

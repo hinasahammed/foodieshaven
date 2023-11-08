@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:foodies_haven/res/components/custom_button.dart';
 import 'package:foodies_haven/res/components/custom_image_picker.dart';
 import 'package:foodies_haven/res/components/custom_textfield.dart';
+import 'package:foodies_haven/utils/utils.dart';
 import 'package:foodies_haven/view/login.dart';
+import 'package:foodies_haven/viewModel/signup_controller.dart';
+import 'package:foodies_haven/viewModel/upload_controller.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -17,19 +20,24 @@ class SignupView extends StatefulWidget {
 
 class _SignupViewState extends State<SignupView> {
   final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   File? selectedImage;
+
+  final uploadController = Get.put(
+    UploadController(),
+  );
+
+  final signupController = Get.put(
+    SignupController(),
+  );
 
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-  }
-
-  void save() {
-    print('validated');
   }
 
   @override
@@ -56,21 +64,19 @@ class _SignupViewState extends State<SignupView> {
                 ),
               ),
               const Gap(80),
-              CustomImagePicker(
-                onImageSelected: (image) {
-                  setState(() {
-                    selectedImage = image;
-                  });
-                },
-              ),
+              const CustomImagePicker(),
               const Gap(40),
               CustomTextfield(
-                controller: _emailController,
+                controller: _usernameController,
                 text: 'User name',
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Enter user name';
+                    return 'Username is required';
+                  }
+
+                  if (value.length < 3) {
+                    return 'Username must be at least 3 characters long';
                   }
                   return null;
                 },
@@ -82,7 +88,12 @@ class _SignupViewState extends State<SignupView> {
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Enter Email';
+                    return 'Email required';
+                  }
+                  final emailRegExp =
+                      RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
+                  if (!emailRegExp.hasMatch(value)) {
+                    return 'Enter a valid email address';
                   }
                   return null;
                 },
@@ -95,17 +106,35 @@ class _SignupViewState extends State<SignupView> {
                 isObsecure: true,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Enter Password';
+                    return 'Password is required';
+                  }
+
+                  if (value.length < 6) {
+                    return 'Password must be at least 6 characters long';
+                  }
+                  if (!value.contains(RegExp(r'[0-9]'))) {
+                    return 'Must contain at least one number';
                   }
                   return null;
                 },
               ),
               const Gap(20),
               CustomButton(
+                  loading: signupController.loading.value,
                   text: 'Sign up',
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      save();
+                  onPressed: () async {
+                    if (uploadController.selectedImage.value.path.isNotEmpty) {
+                      if (_formKey.currentState!.validate()) {
+                        FocusScope.of(context).unfocus();
+                        await signupController.createAccount(
+                          _emailController.text,
+                          _usernameController.text,
+                          _passwordController.text,
+                        );
+                      }
+                    } else {
+                      Utils().showSnackBar(
+                          'Image Error', 'You have to select image');
                     }
                   }),
               const Gap(20),

@@ -1,33 +1,16 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:foodies_haven/viewModel/upload_controller.dart';
+import 'package:get/get.dart';
 
 class CustomImagePicker extends StatefulWidget {
-  final void Function(File) onImageSelected;
-  const CustomImagePicker({
-    super.key,
-    required this.onImageSelected,
-  });
+  const CustomImagePicker({super.key});
 
   @override
   State<CustomImagePicker> createState() => _CustomImagePickerState();
 }
 
 class _CustomImagePickerState extends State<CustomImagePicker> {
-  File? image;
-
-  Future<void> _pickImageFromGallery() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedImage != null) {
-      setState(() {
-        image = File(pickedImage.path);
-      });
-      widget.onImageSelected(image!);
-    }
-  }
+  final pickImageController = Get.put(UploadController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +26,15 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
             ),
             borderRadius: BorderRadius.circular(100),
           ),
-          child: CircleAvatar(
-            radius: 70,
-            backgroundImage: image != null
-                ? FileImage(image!) as ImageProvider
-                : const AssetImage('assets/images/burger_cl2.png'),
+          child: Obx(
+            () => CircleAvatar(
+              radius: 70,
+              backgroundImage:
+                  pickImageController.selectedImage.value.path == ''
+                      ? const AssetImage('assets/images/person.jpeg')
+                      : FileImage(pickImageController.selectedImage.value)
+                          as ImageProvider,
+            ),
           ),
         ),
         Positioned(
@@ -57,7 +44,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
             ),
-            onPressed: _pickImageFromGallery,
+            onPressed: pickImageController.pickImage,
             child: const Icon(Icons.add),
           ),
         ),

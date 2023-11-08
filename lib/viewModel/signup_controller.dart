@@ -13,7 +13,12 @@ class SignupController extends GetxController {
 
   final uploadController = Get.put(UploadController());
 
-  Future createAccount(String email, String userName, String password) async {
+  Future createAccount(
+    String email,
+    String userName,
+    String password,
+    String createdAt,
+  ) async {
     loading.value = true;
     await uploadController.authentication(email, password);
 
@@ -32,6 +37,7 @@ class SignupController extends GetxController {
             password: password,
             imageUrl: uploadController.networkImage.value,
             uid: _auth.currentUser!.uid,
+            createdAt: createdAt,
           ).toMap())
           .then((value) => Utils()
               .showSnackBar('Successfull', 'Account created successfully'))

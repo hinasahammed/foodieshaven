@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodies_haven/main.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -7,16 +7,21 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-            icon: const Icon(Icons.logout),
-          ),
+      body: SafeArea(
+          child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Foodie's Haven",
+                style: theme.textTheme.headlineLarge!.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          )
         ],
-      ),
+      )),
     );
   }
 }

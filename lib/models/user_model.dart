@@ -8,6 +8,7 @@ class UserModel {
   final String password;
   final String imageUrl;
   final String uid;
+  final String createdAt;
 
   UserModel({
     required this.userName,
@@ -15,6 +16,7 @@ class UserModel {
     required this.password,
     required this.imageUrl,
     required this.uid,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -24,6 +26,7 @@ class UserModel {
       'password': password,
       'imageUrl': imageUrl,
       'uid': uid,
+      'createdAt': createdAt,
     };
   }
 
@@ -34,6 +37,7 @@ class UserModel {
       password: map['password'] as String,
       imageUrl: map['imageUrl'] as String,
       uid: map['uid'] as String,
+      createdAt: map['createdAt'] as String,
     );
   }
 

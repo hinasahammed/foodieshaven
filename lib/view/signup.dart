@@ -10,6 +10,7 @@ import 'package:foodies_haven/viewModel/signup_controller.dart';
 import 'package:foodies_haven/viewModel/upload_controller.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -127,10 +128,10 @@ class _SignupViewState extends State<SignupView> {
                       if (_formKey.currentState!.validate()) {
                         FocusScope.of(context).unfocus();
                         await signupController.createAccount(
-                          _emailController.text,
-                          _usernameController.text,
-                          _passwordController.text,
-                        );
+                            _emailController.text,
+                            _usernameController.text,
+                            _passwordController.text,
+                            DateFormat.yMMMd().format(DateTime.now()));
                       }
                     } else {
                       Utils().showSnackBar(

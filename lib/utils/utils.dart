@@ -7,4 +7,6 @@ class Utils {
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 2));
   }
+
+  
 }

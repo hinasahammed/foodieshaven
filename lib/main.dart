@@ -14,6 +14,7 @@ final theme = ThemeData(
   textTheme: GoogleFonts.robotoMonoTextTheme(),
 );
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Foodie's Haven",

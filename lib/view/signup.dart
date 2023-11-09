@@ -41,6 +41,14 @@ class _SignupViewState extends State<SignupView> {
     _passwordController.dispose();
   }
 
+  bool __obscureText = true;
+
+  void _togglePasswordVisibility(bool newValue) {
+    setState(() {
+      __obscureText = newValue;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -104,7 +112,8 @@ class _SignupViewState extends State<SignupView> {
                 controller: _passwordController,
                 text: 'Password',
                 textInputAction: TextInputAction.done,
-                isObsecure: true,
+                isObsecure: __obscureText,
+                toggleVisibility: _togglePasswordVisibility,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Password is required';

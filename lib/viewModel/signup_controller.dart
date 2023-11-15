@@ -43,7 +43,7 @@ class SignupController extends GetxController {
               .showSnackBar('Successfull', 'Account created successfully'))
           .then(
             (value) => Get.to(
-              const LoginView(),
+              () => const LoginView(),
             ),
           );
       loading.value = false;

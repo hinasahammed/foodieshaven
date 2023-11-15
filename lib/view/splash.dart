@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:foodies_haven/view/home.dart';
 import 'package:foodies_haven/view/login.dart';
+import 'package:foodies_haven/view/tab_bar.dart';
 import 'package:get/get.dart';
 
 class SplashView extends StatefulWidget {
@@ -26,7 +26,7 @@ class _SplashViewState extends State<SplashView> {
       Get.offAll(
         () => FirebaseAuth.instance.currentUser == null
             ? const LoginView()
-            : const HomeView(),
+            : const TabBarControlView(),
       );
     });
   }

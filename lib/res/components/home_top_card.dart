@@ -1,12 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeTopCard extends StatelessWidget {
   final String image;
+  final String title;
+  final String time;
   const HomeTopCard({
     super.key,
     required this.image,
+    required this.title,
+    required this.time,
   });
 
   @override
@@ -22,7 +28,6 @@ class HomeTopCard extends StatelessWidget {
             vertical: 10,
           ),
           decoration: BoxDecoration(
-            color: Colors.red,
             borderRadius: BorderRadius.circular(30),
             gradient: LinearGradient(
               colors: [
@@ -37,22 +42,28 @@ class HomeTopCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Gap(10),
                       Text(
-                        'New recipes',
+                        'Today Specials',
                         style: theme.textTheme.labelSmall!.copyWith(
                           color: Colors.white,
                         ),
                       ),
                       const Gap(10),
-                      Text(
-                        'Burger',
-                        style: theme.textTheme.bodyLarge!.copyWith(
-                          color: theme.colorScheme.primary,
+                      SizedBox(
+                        width: Get.width * .45,
+                        child: Text(
+                          title[0].toUpperCase() + title.substring(1),
+                          style: theme.textTheme.bodyLarge!.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const Gap(10),
@@ -71,30 +82,11 @@ class HomeTopCard extends StatelessWidget {
                           ),
                           const Gap(5),
                           Text(
-                            '30 min',
+                            time,
                             style: theme.textTheme.labelSmall!.copyWith(
                               color: theme.colorScheme.primary,
                             ),
                           ),
-                          const Gap(10),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: theme.colorScheme.primary,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Icon(
-                              Icons.graphic_eq,
-                              color: Colors.black45,
-                              size: 15,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            'Easy lvl',
-                            style: theme.textTheme.labelSmall!.copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          )
                         ],
                       )
                     ],
@@ -102,11 +94,27 @@ class HomeTopCard extends StatelessWidget {
                   const Gap(15),
                   Column(
                     children: [
-                      Image.asset(
-                        image,
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.contain,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: CachedNetworkImage(
+                          width: 90,
+                          height: 90,
+                          imageUrl: image,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey.shade200,
+                            highlightColor: Colors.grey.shade100,
+                            enabled: true,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
                     ],
                   )

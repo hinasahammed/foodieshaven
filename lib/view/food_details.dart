@@ -2,12 +2,15 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodies_haven/res/components/meal_category_shimmer.dart';
+import 'package:foodies_haven/viewModel/ordering_controller.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:uuid/uuid.dart';
 
 class FoodDetails extends StatefulWidget {
   final String title;
@@ -21,6 +24,10 @@ class FoodDetails extends StatefulWidget {
 }
 
 class _FoodDetailsState extends State<FoodDetails> {
+  final orderController = Get.put(OrderingController());
+  final firestore = FirebaseFirestore.instance;
+
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -69,8 +76,8 @@ class _FoodDetailsState extends State<FoodDetails> {
                             imageUrl: foodData['url'],
                             fit: BoxFit.fitWidth,
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey.shade200,
-                              highlightColor: Colors.grey.shade100,
+                              baseColor: Colors.black.withOpacity(0.2),
+                              highlightColor: Colors.white54,
                               enabled: true,
                               child: Container(
                                 decoration: const BoxDecoration(
@@ -87,6 +94,10 @@ class _FoodDetailsState extends State<FoodDetails> {
                         bottom: 0,
                         left: 0,
                         child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40),
+                          ),
                           child: BackdropFilter(
                             filter: ImageFilter.blur(
                               sigmaX: 8,
@@ -127,13 +138,53 @@ class _FoodDetailsState extends State<FoodDetails> {
                                         ),
                                         color: Colors.white,
                                       ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.favorite_outline,
-                                          size: 25,
-                                        ),
-                                        color: Colors.white,
+                                      StreamBuilder(
+                                        stream: FirebaseFirestore.instance
+                                            .collection('userData')
+                                            .doc(auth.currentUser!.uid)
+                                            .collection('isFavourite')
+                                            .where('id',
+                                                isEqualTo: foodData['id'])
+                                            .snapshots(),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.data == null) {
+                                            return const Text('Error');
+                                          }
+                                          return IconButton(
+                                            onPressed: () {
+                                              snapshot.data!.docs.isNotEmpty
+                                                  ? orderController
+                                                      .removeFavourite(
+                                                          id: foodData['id'])
+                                                  : orderController
+                                                      .addFavourite(
+                                                      id: foodData['id'],
+                                                      category:
+                                                          foodData['category'],
+                                                      desc: foodData['desc'],
+                                                      price: foodData['price'],
+                                                      rating:
+                                                          foodData['rating'],
+                                                      time: foodData['time'],
+                                                      title: foodData['title'],
+                                                      url: foodData['url'],
+                                                      special:
+                                                          foodData['special'],
+                                                      isFavourite: true,
+                                                    );
+                                            },
+                                            icon: Icon(
+                                              snapshot.data!.docs.isNotEmpty
+                                                  ? Icons.favorite
+                                                  : Icons.favorite_outline,
+                                              size: 25,
+                                            ),
+                                            color:
+                                                snapshot.data!.docs.isNotEmpty
+                                                    ? Colors.red
+                                                    : Colors.white,
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
@@ -220,7 +271,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                     maxLines: 6,
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  const Gap(20),
+                                  const Spacer(),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -232,7 +283,12 @@ class _FoodDetailsState extends State<FoodDetails> {
                                             backgroundColor:
                                                 theme.colorScheme.primary,
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            if (orderController.count.value >
+                                                0) {
+                                              orderController.count.value--;
+                                            }
+                                          },
                                           child: Text(
                                             '-',
                                             style: theme.textTheme.titleLarge!
@@ -244,11 +300,14 @@ class _FoodDetailsState extends State<FoodDetails> {
                                         ),
                                       ),
                                       const Gap(15),
-                                      Text(
-                                        '0',
-                                        style: theme.textTheme.titleLarge!
-                                            .copyWith(
-                                          color: Colors.white,
+                                      Obx(
+                                        () => Text(
+                                          orderController.count.value
+                                              .toString(),
+                                          style: theme.textTheme.titleLarge!
+                                              .copyWith(
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                       const Gap(15),
@@ -260,7 +319,9 @@ class _FoodDetailsState extends State<FoodDetails> {
                                             backgroundColor:
                                                 theme.colorScheme.primary,
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            orderController.count.value++;
+                                          },
                                           child: Text(
                                             '+',
                                             style: theme.textTheme.titleLarge!
@@ -272,7 +333,66 @@ class _FoodDetailsState extends State<FoodDetails> {
                                         ),
                                       ),
                                     ],
-                                  )
+                                  ),
+                                  const Spacer(),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            padding: const EdgeInsets.all(12),
+                                            backgroundColor: theme
+                                                .colorScheme.primaryContainer,
+                                          ),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Order food',
+                                            style: theme.textTheme.bodyLarge!
+                                                .copyWith(
+                                              color: theme.colorScheme
+                                                  .onPrimaryContainer,
+                                            ),
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            padding: const EdgeInsets.all(12),
+                                            backgroundColor: theme
+                                                .colorScheme.secondaryContainer,
+                                          ),
+                                          onPressed: () {
+                                            orderController.addToCart(
+                                              id: const Uuid().v4(),
+                                              category: foodData['category'],
+                                              desc: foodData['desc'],
+                                              price: foodData['price'],
+                                              rating:
+                                                  foodData['rating'].toString(),
+                                              time: foodData['time'],
+                                              title: foodData['title'],
+                                              url: foodData['url'],
+                                              special: foodData['special'],
+                                            );
+                                          },
+                                          child: Text(
+                                            'Add to cart',
+                                            style: theme.textTheme.bodyLarge!
+                                                .copyWith(
+                                              color: theme.colorScheme
+                                                  .onSecondaryContainer,
+                                            ),
+                                          ),
+                                        ),
+                                      ])
                                 ],
                               ),
                             ),

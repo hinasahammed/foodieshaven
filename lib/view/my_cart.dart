@@ -1,30 +1,38 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodies_haven/res/components/shimmer_list.dart';
-import 'package:foodies_haven/view/food_details.dart';
+import 'package:foodies_haven/viewModel/ordering_controller.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
-class AllMeals extends StatefulWidget {
-  const AllMeals({super.key});
+class MyCartView extends StatefulWidget {
+  const MyCartView({super.key});
 
   @override
-  State<AllMeals> createState() => _AllMealsState();
+  State<MyCartView> createState() => _MyCartViewState();
 }
 
-class _AllMealsState extends State<AllMeals> {
+class _MyCartViewState extends State<MyCartView> {
+  final auth = FirebaseAuth.instance;
+  final cartController = Get.put(OrderingController());
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All Meals'),
+        title: const Text('My cart'),
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('food').snapshots(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('userData')
+            .doc(auth.currentUser!.uid)
+            .collection('myCart')
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView.builder(
@@ -37,11 +45,9 @@ class _AllMealsState extends State<AllMeals> {
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text(
-                'No data found!',
-                style: theme.textTheme.titleLarge!.copyWith(
-                  color: Colors.white,
-                ),
+              child: Lottie.asset(
+                'assets/animation/no_cart_item.json',
+                repeat: false,
               ),
             );
           } else {
@@ -54,14 +60,35 @@ class _AllMealsState extends State<AllMeals> {
                 (foodData) {
                   return Card(
                     margin: const EdgeInsets.only(bottom: 16),
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(
-                          () => FoodDetails(
-                            title: foodData['title'],
-                          ),
+                    child: Dismissible(
+                      background: Container(
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.error,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.arrow_back,
+                              color: theme.colorScheme.onError,
+                            ),
+                            Text(
+                              'Move to delete',
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                color: theme.colorScheme.onError,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      onDismissed: (direction) {
+                        cartController.deleteItem(
+                          id: foodData['id'],
                         );
                       },
+                      key: ValueKey(foodData),
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         width: Get.width,
@@ -81,7 +108,7 @@ class _AllMealsState extends State<AllMeals> {
                                     placeholder: (context, url) =>
                                         Shimmer.fromColors(
                                       baseColor: Colors.black.withOpacity(0.2),
-      highlightColor: Colors.white54,
+                                      highlightColor: Colors.white54,
                                       enabled: true,
                                       child: Container(
                                         width: Get.width,

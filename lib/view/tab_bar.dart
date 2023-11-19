@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodies_haven/view/account.dart';
 import 'package:foodies_haven/view/home.dart';
 import 'package:foodies_haven/view/search.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -16,9 +17,7 @@ class _TabBarControlViewState extends State<TabBarControlView> {
   final _pages = [
     const HomeView(),
     const SearchView(),
-    const Center(
-      child: Text('Account'),
-    )
+    const AccountView(),
   ];
   @override
   Widget build(BuildContext context) {

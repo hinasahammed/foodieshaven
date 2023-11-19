@@ -109,8 +109,8 @@ class HomeTopCard extends StatelessWidget {
                             imageUrl: image,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey.shade200,
-                              highlightColor: Colors.grey.shade100,
+                             baseColor: Colors.black.withOpacity(0.2),
+      highlightColor: Colors.white54,
                               enabled: true,
                               child: Container(
                                 decoration: BoxDecoration(

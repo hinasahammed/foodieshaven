@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodies_haven/utils/utils.dart';
-import 'package:foodies_haven/view/home.dart';
+import 'package:foodies_haven/view/tab_bar.dart';
 import 'package:get/get.dart';
 
 class SigninController extends GetxController {
@@ -19,7 +19,7 @@ class SigninController extends GetxController {
               (value) => Utils().showSnackBar('Success', 'Login Successfully'))
           .then(
             (value) => Get.offAll(
-              const HomeView(),
+              const TabBarControlView(),
             ),
           );
       loading.value = false;

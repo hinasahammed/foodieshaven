@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foodies_haven/res/components/meal_category_shimmer.dart';
+import 'package:foodies_haven/res/components/edit_profile.dart';
 import 'package:foodies_haven/utils/utils.dart';
 import 'package:foodies_haven/view/favourite.dart';
 import 'package:foodies_haven/view/login.dart';
@@ -32,6 +32,15 @@ class _AccountViewState extends State<AccountView> {
     }
   }
 
+  void showEdit(String userName) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) =>
+          EditProfile(userName: userName, uid: auth.currentUser!.uid),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -43,7 +52,19 @@ class _AccountViewState extends State<AccountView> {
         stream: FirebaseFirestore.instance.collection('userData').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const MealCategoryShimmer();
+            return Shimmer.fromColors(
+              baseColor: Colors.black.withOpacity(0.2),
+              highlightColor: Colors.white54,
+              enabled: true,
+              child: Container(
+                width: Get.width * .3,
+                height: Get.height * .14,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.black54,
+                ),
+              ),
+            );
           }
 
           if (snapshot.hasError) {
@@ -80,8 +101,8 @@ class _AccountViewState extends State<AccountView> {
                             imageUrl: userData['imageUrl'],
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
-                               baseColor: Colors.black.withOpacity(0.2),
-      highlightColor: Colors.white54,
+                              baseColor: Colors.black.withOpacity(0.2),
+                              highlightColor: Colors.white54,
                               enabled: true,
                               child: Container(
                                 width: Get.width * .3,
@@ -137,10 +158,13 @@ class _AccountViewState extends State<AccountView> {
                             title: Text('My order'),
                           ),
                         ),
-                        const Card(
+                        Card(
                           child: ListTile(
-                            leading: Icon(Icons.edit),
-                            title: Text('Edit'),
+                            onTap: () {
+                              showEdit(userData['userName']);
+                            },
+                            leading: const Icon(Icons.edit),
+                            title: const Text('Edit'),
                           ),
                         ),
                         const Spacer(),

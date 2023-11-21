@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class CustomTextfield extends StatefulWidget {
   final TextEditingController controller;
@@ -49,7 +48,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                     ? Icons.visibility_off
                     : Icons.visibility),
               )
-            : const Gap(1),
+            : const SizedBox(),
       ),
       validator: widget.validator,
     );

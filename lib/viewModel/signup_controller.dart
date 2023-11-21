@@ -24,7 +24,6 @@ class SignupController extends GetxController {
 
     await uploadController.uploadImage(
       uid: _auth.currentUser!.uid,
-      userName: userName,
     );
 
     try {

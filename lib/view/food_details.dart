@@ -72,7 +72,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                         child: ClipRRect(
                           child: CachedNetworkImage(
                             width: Get.width,
-                            height: Get.height * .4,
+                            height: Get.height * .33,
                             imageUrl: foodData['url'],
                             fit: BoxFit.fitWidth,
                             placeholder: (context, url) => Shimmer.fromColors(
@@ -277,9 +277,9 @@ class _FoodDetailsState extends State<FoodDetails> {
                                     children: [
                                       SizedBox(
                                         width: Get.width * .15,
+                                        height: Get.height * .06,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.all(1),
                                             backgroundColor:
                                                 theme.colorScheme.primary,
                                           ),
@@ -295,6 +295,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                                 .copyWith(
                                               color:
                                                   theme.colorScheme.onPrimary,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
@@ -313,6 +314,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                       const Gap(15),
                                       SizedBox(
                                         width: Get.width * .15,
+                                        height: Get.height * .06,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             padding: const EdgeInsets.all(1),

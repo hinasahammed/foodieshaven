@@ -5,7 +5,7 @@ import 'package:foodies_haven/utils/utils.dart';
 import 'package:get/get.dart';
 
 class OrderingController extends GetxController {
-  RxInt count = 0.obs;
+  RxInt count = 1.obs;
   RxString foodId = ''.obs;
   final firestore = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;

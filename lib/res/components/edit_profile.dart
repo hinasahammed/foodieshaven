@@ -36,6 +36,14 @@ class _EditProfileState extends State<EditProfile> {
         key: _formKey,
         child: Column(
           children: [
+            Text(
+              'Edit your Profile',
+              style: theme.textTheme.titleLarge!.copyWith(
+                color: theme.colorScheme.onBackground,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Gap(30),
             const CustomImagePicker(),
             const Gap(20),
             CustomTextfield(

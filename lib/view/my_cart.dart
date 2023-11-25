@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodies_haven/res/components/shimmer_list.dart';
-import 'package:foodies_haven/viewModel/ordering_controller.dart';
+import 'package:foodies_haven/viewModel/cart_controller.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -19,7 +19,8 @@ class MyCartView extends StatefulWidget {
 
 class _MyCartViewState extends State<MyCartView> {
   final auth = FirebaseAuth.instance;
-  final cartController = Get.put(OrderingController());
+  final cartController = Get.put(CartController());
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -61,13 +62,14 @@ class _MyCartViewState extends State<MyCartView> {
                   return Card(
                     margin: const EdgeInsets.only(bottom: 16),
                     child: Dismissible(
+                      direction: DismissDirection.endToStart,
                       background: Container(
                         decoration: BoxDecoration(
                           color: theme.colorScheme.error,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Icon(
                               Icons.arrow_back,
@@ -83,9 +85,40 @@ class _MyCartViewState extends State<MyCartView> {
                           ],
                         ),
                       ),
-                      onDismissed: (direction) {
-                        cartController.deleteItem(
-                          id: foodData['id'],
+                      confirmDismiss: (direction) async {
+                        return await showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                              'Confirm',
+                              style: theme.textTheme.titleLarge!.copyWith(
+                                color: theme.colorScheme.onBackground,
+                              ),
+                            ),
+                            content: Text(
+                              'Are you sure you want to delete?',
+                              style: theme.textTheme.titleSmall!.copyWith(
+                                color: theme.colorScheme.onBackground,
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                  cartController.deleteCartItem(
+                                    id: foodData['id'],
+                                  );
+                                },
+                                child: const Text('Delete'),
+                              ),
+                            ],
+                          ),
                         );
                       },
                       key: ValueKey(foodData),

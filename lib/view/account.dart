@@ -7,6 +7,7 @@ import 'package:foodies_haven/utils/utils.dart';
 import 'package:foodies_haven/view/favourite.dart';
 import 'package:foodies_haven/view/login.dart';
 import 'package:foodies_haven/view/my_cart.dart';
+import 'package:foodies_haven/view/my_order.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -32,8 +33,8 @@ class _AccountViewState extends State<AccountView> {
     }
   }
 
-  void showEdit(String userName) {
-    showModalBottomSheet(
+  void showEdit(String userName) async {
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) =>
@@ -152,10 +153,13 @@ class _AccountViewState extends State<AccountView> {
                             title: const Text('Favourites'),
                           ),
                         ),
-                        const Card(
+                        Card(
                           child: ListTile(
-                            leading: Icon(Icons.shopping_bag),
-                            title: Text('My order'),
+                            onTap: () {
+                              Get.to(() => const MyOrderView());
+                            },
+                            leading: const Icon(Icons.shopping_bag),
+                            title: const Text('My order'),
                           ),
                         ),
                         Card(

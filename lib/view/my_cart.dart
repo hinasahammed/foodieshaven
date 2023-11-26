@@ -70,8 +70,8 @@ class _MyCartViewState extends State<MyCartView> {
                           RxInt itemCounter = itemCounters[itemId] ??= RxInt(1);
                           int totalItemPrice =
                               itemCounter.value * int.parse(foodData['price']);
-                          cartController.totalAmount.value += totalItemPrice;
 
+                          cartController.totalAmount.value += totalItemPrice;
                           return Card(
                             margin: const EdgeInsets.only(bottom: 16),
                             child: Dismissible(
@@ -239,6 +239,7 @@ class _MyCartViewState extends State<MyCartView> {
                                                 if (itemCounter.value > 1) {
                                                   cartController
                                                       .totalAmount.value = 0;
+
                                                   itemCounters[itemId]?.value--;
                                                 }
                                               },

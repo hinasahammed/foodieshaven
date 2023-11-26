@@ -52,8 +52,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   google_nav_bar: ^5.0.6
   uuid: ^4.2.1
-  easy_stepper: ^0.8.2
-  flutter_svg: ^2.0.9
+  flutter_launcher_icons: ^0.13.1
   
 dev_dependencies:
   flutter_test:

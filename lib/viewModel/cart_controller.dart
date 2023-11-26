@@ -4,9 +4,10 @@ import 'package:foodies_haven/models/food_model.dart';
 import 'package:foodies_haven/utils/utils.dart';
 import 'package:get/get.dart';
 
-class CartController extends GetxController{
-   final firestore = FirebaseFirestore.instance;
+class CartController extends GetxController {
+  final firestore = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;
+  final RxInt totalAmount = 0.obs;
 
   void addToCart({
     required String id,
@@ -60,5 +61,4 @@ class CartController extends GetxController{
       Utils().showSnackBar('Error', e.toString());
     }
   }
-
 }

@@ -8,6 +8,7 @@ import 'package:foodies_haven/view/favourite.dart';
 import 'package:foodies_haven/view/login.dart';
 import 'package:foodies_haven/view/my_cart.dart';
 import 'package:foodies_haven/view/my_order.dart';
+import 'package:foodies_haven/viewModel/account_controller.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -20,6 +21,7 @@ class AccountView extends StatefulWidget {
 
 class _AccountViewState extends State<AccountView> {
   final auth = FirebaseAuth.instance;
+  final accountController = Get.put(AccountController());
 
   void logout() async {
     try {
@@ -172,6 +174,17 @@ class _AccountViewState extends State<AccountView> {
                             },
                             leading: const Icon(Icons.edit),
                             title: const Text('Edit'),
+                          ),
+                        ),
+                        Obx(
+                          () => Card(
+                            child: SwitchListTile(
+                              onChanged: (value) {
+                                accountController.isSwitched.value = value;
+                              },
+                              value: accountController.isSwitched.value,
+                              title: const Text('Light mode'),
+                            ),
                           ),
                         ),
                         const Spacer(),

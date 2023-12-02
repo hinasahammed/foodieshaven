@@ -50,7 +50,10 @@ class _AccountViewState extends State<AccountView> {
         title: const Text('Account'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('userData').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('userData')
+            .where("uid", isEqualTo: auth.currentUser!.uid)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Shimmer.fromColors(

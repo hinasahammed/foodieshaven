@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:foodies_haven/view/login.dart';
+import 'package:foodies_haven/view/on_board.dart';
 import 'package:foodies_haven/view/tab_bar.dart';
+import 'package:foodies_haven/viewModel/get_started_controller.dart';
 import 'package:get/get.dart';
 
 class SplashView extends StatefulWidget {
@@ -15,6 +17,7 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  final getStartedController = Get.put(GetStartedController());
   @override
   void initState() {
     super.initState();
@@ -23,11 +26,13 @@ class _SplashViewState extends State<SplashView> {
 
   void nextSession() {
     Timer(const Duration(seconds: 3), () {
-      Get.offAll(
-        () => FirebaseAuth.instance.currentUser == null
-            ? const LoginView()
-            : const TabBarControlView(),
-      );
+      if (FirebaseAuth.instance.currentUser == null) {
+        getStartedController.isStarted.value
+            ? Get.offAll(() => const LoginView())
+            : Get.offAll(() => const OnBoardView());
+      } else {
+        Get.offAll(() => const TabBarControlView());
+      }
     });
   }
 

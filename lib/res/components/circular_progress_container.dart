@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:foodies_haven/view/signup.dart';
 import 'package:foodies_haven/viewModel/get_started_controller.dart';
 import 'package:get/get.dart';
 
 class CircularProgressContainer extends StatefulWidget {
-  const CircularProgressContainer({super.key});
+  final PageController pageController;
+  final bool isLastStep;
+  const CircularProgressContainer(
+      {super.key, required this.pageController, required this.isLastStep});
 
   @override
   State<CircularProgressContainer> createState() =>
@@ -13,12 +17,24 @@ class CircularProgressContainer extends StatefulWidget {
 class _CircularProgressContainerState extends State<CircularProgressContainer> {
   final controller = Get.put(GetStartedController());
 
+  double calculateProgress() {
+    final double page = (widget.pageController.page ?? 0).clamp(0, 3.0);
+    return page / 3.0;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
       onTap: () {
-        controller.updateCount();
+        if (widget.isLastStep) {
+          Get.offAll(() => const SignupView());
+          controller.isStarted.value = true;
+        } else {
+          widget.pageController.nextPage(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn);
+        }
       },
       child: Stack(
         alignment: Alignment.center,
@@ -34,7 +50,7 @@ class _CircularProgressContainerState extends State<CircularProgressContainer> {
             ),
             child: Center(
               child: Icon(
-                Icons.arrow_forward_ios,
+                widget.isLastStep ? Icons.check : Icons.arrow_forward_ios,
                 color: theme.colorScheme.onPrimary,
               ),
             ),
@@ -45,7 +61,7 @@ class _CircularProgressContainerState extends State<CircularProgressContainer> {
               width: Get.width * .16,
               height: Get.height * .07,
               child: CircularProgressIndicator(
-                value: 0.8,
+                value: calculateProgress(),
                 valueColor:
                     AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
                 strokeWidth: 4,

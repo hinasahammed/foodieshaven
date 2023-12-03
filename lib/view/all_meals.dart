@@ -40,7 +40,7 @@ class _AllMealsState extends State<AllMeals> {
               child: Text(
                 'No data found!',
                 style: theme.textTheme.titleLarge!.copyWith(
-                  color: Colors.white,
+                  color: theme.colorScheme.onBackground,
                 ),
               ),
             );
@@ -81,7 +81,7 @@ class _AllMealsState extends State<AllMeals> {
                                     placeholder: (context, url) =>
                                         Shimmer.fromColors(
                                       baseColor: Colors.black.withOpacity(0.2),
-      highlightColor: Colors.white54,
+                                      highlightColor: Colors.white54,
                                       enabled: true,
                                       child: Container(
                                         width: Get.width,
@@ -113,7 +113,7 @@ class _AllMealsState extends State<AllMeals> {
                                                 .substring(1),
                                         style:
                                             theme.textTheme.bodyLarge!.copyWith(
-                                          color: Colors.white,
+                                          color: theme.colorScheme.onBackground,
                                           fontWeight: FontWeight.bold,
                                         ),
                                         maxLines: 2,
@@ -136,7 +136,8 @@ class _AllMealsState extends State<AllMeals> {
                                       '(50)Reviews',
                                       style:
                                           theme.textTheme.labelSmall!.copyWith(
-                                        color: Colors.white54,
+                                        color: theme.colorScheme.onBackground
+                                            .withOpacity(.4),
                                       ),
                                       textAlign: TextAlign.center,
                                     ),

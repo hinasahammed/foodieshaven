@@ -69,7 +69,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
           decoration: BoxDecoration(
             color: theme.colorScheme.secondaryContainer.withOpacity(.25),
             border: Border.all(
-              color: Colors.white.withOpacity(.2),
+              color: theme.colorScheme.onBackground.withOpacity(.2),
             ),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -90,7 +90,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                       Icons.arrow_back_ios,
                       size: 25,
                     ),
-                    color: Colors.white,
+                    color: theme.colorScheme.onBackground,
                   ),
                   StreamBuilder(
                     stream: FirebaseFirestore.instance
@@ -129,7 +129,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                         ),
                         color: snapshot.data!.docs.isNotEmpty
                             ? Colors.red
-                            : Colors.white,
+                            : theme.colorScheme.onBackground,
                       );
                     },
                   ),
@@ -237,7 +237,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                     () => Text(
                       orderController.count.value.toString(),
                       style: theme.textTheme.titleLarge!.copyWith(
-                        color: Colors.white,
+                        color: theme.colorScheme.onBackground,
                       ),
                     ),
                   ),

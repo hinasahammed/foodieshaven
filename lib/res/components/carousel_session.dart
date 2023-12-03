@@ -16,7 +16,7 @@ class CarouselSession extends StatelessWidget {
           .where('special', isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
-         if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const HomeTopShimmer();
         }
 
@@ -28,7 +28,7 @@ class CarouselSession extends StatelessWidget {
                 child: Text(
                   'No special food',
                   style: theme.textTheme.titleLarge!.copyWith(
-                    color: Colors.white,
+                    color: theme.colorScheme.onBackground,
                   ),
                 ),
               )

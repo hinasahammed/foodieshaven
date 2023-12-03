@@ -8,8 +8,9 @@ import 'package:foodies_haven/view/favourite.dart';
 import 'package:foodies_haven/view/login.dart';
 import 'package:foodies_haven/view/my_cart.dart';
 import 'package:foodies_haven/view/my_order.dart';
-import 'package:foodies_haven/viewModel/account_controller.dart';
+import 'package:foodies_haven/viewModel/theme_controller.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AccountView extends StatefulWidget {
@@ -21,7 +22,7 @@ class AccountView extends StatefulWidget {
 
 class _AccountViewState extends State<AccountView> {
   final auth = FirebaseAuth.instance;
-  final accountController = Get.put(AccountController());
+  final _getStorage = GetStorage();
 
   void logout() async {
     try {
@@ -83,7 +84,7 @@ class _AccountViewState extends State<AccountView> {
               child: Text(
                 'No data found!',
                 style: theme.textTheme.titleLarge!.copyWith(
-                  color: Colors.white,
+                  color: theme.colorScheme.onBackground,
                 ),
               ),
             );
@@ -176,15 +177,13 @@ class _AccountViewState extends State<AccountView> {
                             title: const Text('Edit'),
                           ),
                         ),
-                        Obx(
-                          () => Card(
-                            child: SwitchListTile(
-                              onChanged: (value) {
-                                accountController.isSwitched.value = value;
-                              },
-                              value: accountController.isSwitched.value,
-                              title: const Text('Light mode'),
-                            ),
+                        Card(
+                          child: SwitchListTile(
+                            onChanged: (value) {
+                              ThemeController().changeThemeMode();
+                            },
+                            value: _getStorage.read('isDarkMode'),
+                            title: const Text('Dark mode'),
                           ),
                         ),
                         const Spacer(),

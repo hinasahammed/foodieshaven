@@ -42,7 +42,7 @@ class _FoodDetailsState extends State<FoodDetails> {
               child: Text(
                 'The food not found!',
                 style: theme.textTheme.titleLarge!.copyWith(
-                  color: Colors.white,
+                  color: theme.colorScheme.onBackground,
                 ),
               ),
             );

@@ -118,7 +118,7 @@ class _FavouriteViewState extends State<FavouriteView> {
                                                 .substring(1),
                                         style:
                                             theme.textTheme.bodyLarge!.copyWith(
-                                          color: Colors.white,
+                                          color: theme.colorScheme.onBackground,
                                           fontWeight: FontWeight.bold,
                                         ),
                                         maxLines: 2,
@@ -141,7 +141,8 @@ class _FavouriteViewState extends State<FavouriteView> {
                                       '(50)Reviews',
                                       style:
                                           theme.textTheme.labelSmall!.copyWith(
-                                        color: Colors.white54,
+                                        color: theme.colorScheme.onBackground
+                                            .withOpacity(.4),
                                       ),
                                       textAlign: TextAlign.center,
                                     ),

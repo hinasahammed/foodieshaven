@@ -39,19 +39,19 @@ class _MealCategoryState extends State<MealCategory> {
               Text(
                 'Meal Category',
                 style: theme.textTheme.titleLarge!.copyWith(
-                  color: Colors.white,
+                  color: theme.colorScheme.onBackground,
                 ),
               ),
               TextButton(
                 onPressed: () {
                   Get.to(
-                    ()=>const AllMeals(),
+                    () => const AllMeals(),
                   );
                 },
                 child: Text(
                   'See all',
                   style: theme.textTheme.labelMedium!.copyWith(
-                    color: Colors.white54,
+                    color: theme.colorScheme.onBackground.withOpacity(.8),
                   ),
                 ),
               ),
@@ -83,7 +83,7 @@ class _MealCategoryState extends State<MealCategory> {
                         gradient: LinearGradient(
                           colors: [
                             theme.colorScheme.primary.withOpacity(.6),
-                            theme.colorScheme.primaryContainer.withOpacity(.6),
+                            theme.colorScheme.primary.withOpacity(.5),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -98,7 +98,7 @@ class _MealCategoryState extends State<MealCategory> {
                           Text(
                             text[index],
                             style: theme.textTheme.labelLarge!.copyWith(
-                              color: Colors.white,
+                              color: theme.colorScheme.onPrimary,
                             ),
                           )
                         ],

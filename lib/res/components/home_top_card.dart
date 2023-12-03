@@ -58,7 +58,7 @@ class HomeTopCard extends StatelessWidget {
                         Text(
                           'Today Specials',
                           style: theme.textTheme.labelSmall!.copyWith(
-                            color: Colors.white,
+                            color: theme.colorScheme.onPrimaryContainer,
                           ),
                         ),
                         const Gap(10),
@@ -81,9 +81,9 @@ class HomeTopCard extends StatelessWidget {
                                 color: theme.colorScheme.primary,
                                 borderRadius: BorderRadius.circular(4),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.timelapse,
-                                color: Colors.black45,
+                                color: theme.colorScheme.onPrimary,
                                 size: 15,
                               ),
                             ),
@@ -109,8 +109,8 @@ class HomeTopCard extends StatelessWidget {
                             imageUrl: image,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
-                             baseColor: Colors.black.withOpacity(0.2),
-      highlightColor: Colors.white54,
+                              baseColor: Colors.black.withOpacity(0.2),
+                              highlightColor: Colors.white54,
                               enabled: true,
                               child: Container(
                                 decoration: BoxDecoration(

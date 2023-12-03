@@ -67,7 +67,7 @@ class _HomeTopSessionState extends State<HomeTopSession> {
                                 Text(
                                   'Hi,',
                                   style: theme.textTheme.bodyLarge!.copyWith(
-                                    color: Colors.white,
+                                    color: theme.colorScheme.onBackground,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -79,8 +79,8 @@ class _HomeTopSessionState extends State<HomeTopSession> {
                                           .toString()
                                           .substring(1),
                                   style: theme.textTheme.bodyLarge!.copyWith(
-                                    color: Colors.white,
                                     fontWeight: FontWeight.bold,
+                                    color: theme.colorScheme.onBackground,
                                   ),
                                 ),
                               ],
@@ -88,7 +88,7 @@ class _HomeTopSessionState extends State<HomeTopSession> {
                             Text(
                               'Ready to order food?',
                               style: theme.textTheme.labelMedium!.copyWith(
-                                color: Colors.white54,
+                                color: theme.colorScheme.onBackground,
                               ),
                             )
                           ],
@@ -102,7 +102,7 @@ class _HomeTopSessionState extends State<HomeTopSession> {
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.black.withOpacity(0.2),
-      highlightColor: Colors.white54,
+                              highlightColor: Colors.white54,
                               enabled: true,
                               child: Container(
                                 decoration: BoxDecoration(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodies_haven/main.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -14,6 +13,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ElevatedButton(
       onPressed: onPressed,
       child: loading

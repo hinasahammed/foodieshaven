@@ -42,7 +42,7 @@ class _MealCategoryBottomState extends State<MealCategoryBottom> {
             child: Text(
               'No data found!',
               style: theme.textTheme.titleLarge!.copyWith(
-                color: Colors.white,
+                color: theme.colorScheme.onBackground,
               ),
             ),
           );
@@ -65,7 +65,6 @@ class _MealCategoryBottomState extends State<MealCategoryBottom> {
                     width: Get.width * .55,
                     height: Get.height * .6,
                     decoration: BoxDecoration(
-                      // color: Colors.black,
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
@@ -90,8 +89,8 @@ class _MealCategoryBottomState extends State<MealCategoryBottom> {
                             borderRadius: BorderRadius.circular(15),
                             gradient: LinearGradient(
                               colors: [
-                                theme.colorScheme.secondary.withOpacity(.15),
-                                theme.colorScheme.secondary.withOpacity(.1),
+                                theme.colorScheme.primary.withOpacity(.15),
+                                theme.colorScheme.primary.withOpacity(.1),
                               ],
                             ),
                           ),
@@ -103,7 +102,7 @@ class _MealCategoryBottomState extends State<MealCategoryBottom> {
                                 foodData['title'][0].toString().toUpperCase() +
                                     foodData['title'].toString().substring(1),
                                 style: theme.textTheme.bodyLarge!.copyWith(
-                                  color: Colors.white,
+                                  color: theme.colorScheme.onBackground,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 textAlign: TextAlign.center,
@@ -145,7 +144,7 @@ class _MealCategoryBottomState extends State<MealCategoryBottom> {
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Shimmer.fromColors(
                           baseColor: Colors.black.withOpacity(0.2),
-      highlightColor: Colors.white54,
+                          highlightColor: Colors.white54,
                           enabled: true,
                           child: Container(
                             decoration: const BoxDecoration(

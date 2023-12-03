@@ -197,7 +197,8 @@ class _MyCartViewState extends State<MyCartView> {
                                                 style: theme
                                                     .textTheme.bodyLarge!
                                                     .copyWith(
-                                                  color: Colors.white,
+                                                  color: theme
+                                                      .colorScheme.onBackground,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                                 maxLines: 2,

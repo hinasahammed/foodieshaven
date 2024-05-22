@@ -14,13 +14,13 @@ class CartBottomCard extends StatelessWidget {
         Text(
           title,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         Text(
           value,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         )
       ],

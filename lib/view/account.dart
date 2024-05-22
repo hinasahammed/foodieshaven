@@ -84,7 +84,7 @@ class _AccountViewState extends State<AccountView> {
               child: Text(
                 'No data found!',
                 style: theme.textTheme.titleLarge!.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
             );
@@ -105,7 +105,7 @@ class _AccountViewState extends State<AccountView> {
                           child: CachedNetworkImage(
                             width: Get.width * .3,
                             height: Get.height * .14,
-                            imageUrl: userData['imageUrl'],
+                            imageUrl: userData['imageUrl'] ?? '',
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.black.withOpacity(0.2),
@@ -125,17 +125,16 @@ class _AccountViewState extends State<AccountView> {
                           ),
                         ),
                         Text(
-                          userData['userName'],
+                          userData['userName'] ?? '',
                           style: theme.textTheme.titleLarge!.copyWith(
-                            color: theme.colorScheme.onBackground,
+                            color: theme.colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          userData['email'],
+                          userData['email'] ?? '',
                           style: theme.textTheme.titleSmall!.copyWith(
-                            color:
-                                theme.colorScheme.onBackground.withOpacity(.6),
+                            color: theme.colorScheme.onSurface.withOpacity(.6),
                           ),
                         ),
                         const Spacer(),
@@ -171,7 +170,7 @@ class _AccountViewState extends State<AccountView> {
                         Card(
                           child: ListTile(
                             onTap: () {
-                              showEdit(userData['userName']);
+                              showEdit(userData['userName'] ?? '');
                             },
                             leading: const Icon(Icons.edit),
                             title: const Text('Edit'),
@@ -182,7 +181,7 @@ class _AccountViewState extends State<AccountView> {
                             onChanged: (value) {
                               ThemeController().changeThemeMode();
                             },
-                            value: _getStorage.read('isDarkMode'),
+                            value: _getStorage.read('isDarkMode') ?? false,
                             title: const Text('Dark mode'),
                           ),
                         ),

@@ -108,14 +108,14 @@ class _MyCartViewState extends State<MyCartView> {
                                       'Confirm',
                                       style:
                                           theme.textTheme.titleLarge!.copyWith(
-                                        color: theme.colorScheme.onBackground,
+                                        color: theme.colorScheme.onSurface,
                                       ),
                                     ),
                                     content: Text(
                                       'Are you sure you want to delete?',
                                       style:
                                           theme.textTheme.titleSmall!.copyWith(
-                                        color: theme.colorScheme.onBackground,
+                                        color: theme.colorScheme.onSurface,
                                       ),
                                     ),
                                     actions: <Widget>[
@@ -198,7 +198,7 @@ class _MyCartViewState extends State<MyCartView> {
                                                     .textTheme.bodyLarge!
                                                     .copyWith(
                                                   color: theme
-                                                      .colorScheme.onBackground,
+                                                      .colorScheme.onSurface,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                                 maxLines: 2,
@@ -229,7 +229,7 @@ class _MyCartViewState extends State<MyCartView> {
                                             style: theme.textTheme.bodyLarge!
                                                 .copyWith(
                                               color: theme
-                                                  .colorScheme.onBackground,
+                                                  .colorScheme.onSurface,
                                             ),
                                           ),
                                         ),

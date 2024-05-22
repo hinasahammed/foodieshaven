@@ -49,7 +49,7 @@ class _CheckoutViewState extends State<CheckoutView> {
             title: Text(
               'Enter your table number',
               style: theme.textTheme.titleLarge!.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
               ),
             ),
             content: SizedBox(
@@ -104,7 +104,7 @@ class _CheckoutViewState extends State<CheckoutView> {
             title: Text(
               'Order details',
               style: theme.textTheme.titleLarge!.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
               ),
             ),
             content: SizedBox(
@@ -158,14 +158,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                       Text(
                         'Total:',
                         style: theme.textTheme.bodyLarge!.copyWith(
-                          color: theme.colorScheme.onBackground,
+                          color: theme.colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         '₹$displayValue',
                         style: theme.textTheme.bodyLarge!.copyWith(
-                            color: theme.colorScheme.onBackground,
+                            color: theme.colorScheme.onSurface,
                             fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,

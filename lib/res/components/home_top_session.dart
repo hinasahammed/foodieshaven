@@ -67,7 +67,7 @@ class _HomeTopSessionState extends State<HomeTopSession> {
                                 Text(
                                   'Hi,',
                                   style: theme.textTheme.bodyLarge!.copyWith(
-                                    color: theme.colorScheme.onBackground,
+                                    color: theme.colorScheme.onSurface,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -80,7 +80,7 @@ class _HomeTopSessionState extends State<HomeTopSession> {
                                           .substring(1),
                                   style: theme.textTheme.bodyLarge!.copyWith(
                                     fontWeight: FontWeight.bold,
-                                    color: theme.colorScheme.onBackground,
+                                    color: theme.colorScheme.onSurface,
                                   ),
                                 ),
                               ],
@@ -88,7 +88,7 @@ class _HomeTopSessionState extends State<HomeTopSession> {
                             Text(
                               'Ready to order food?',
                               style: theme.textTheme.labelMedium!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                             )
                           ],

@@ -39,7 +39,7 @@ class _MealCategoryState extends State<MealCategory> {
               Text(
                 'Meal Category',
                 style: theme.textTheme.titleLarge!.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
               TextButton(
@@ -51,7 +51,7 @@ class _MealCategoryState extends State<MealCategory> {
                 child: Text(
                   'See all',
                   style: theme.textTheme.labelMedium!.copyWith(
-                    color: theme.colorScheme.onBackground.withOpacity(.8),
+                    color: theme.colorScheme.onSurface.withOpacity(.8),
                   ),
                 ),
               ),

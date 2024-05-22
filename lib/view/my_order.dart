@@ -115,7 +115,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                             Text(
                               'Name:',
                               style: theme.textTheme.labelLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                             ),
                             SizedBox(
@@ -124,7 +124,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                 foodData['Name'][0].toString().toUpperCase() +
                                     foodData['Name'].toString().substring(1),
                                 style: theme.textTheme.labelLarge!.copyWith(
-                                  color: theme.colorScheme.onBackground,
+                                  color: theme.colorScheme.onSurface,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
@@ -141,13 +141,13 @@ class _MyOrderViewState extends State<MyOrderView> {
                             Text(
                               'Count:',
                               style: theme.textTheme.labelLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                             ),
                             Text(
                               foodData['Count'].toString(),
                               style: theme.textTheme.labelLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -163,14 +163,14 @@ class _MyOrderViewState extends State<MyOrderView> {
                             Text(
                               'date:',
                               style: theme.textTheme.labelLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                             ),
                             Text(
                               DateFormat.yMMMd()
                                   .format(DateTime.parse(foodData['date'])),
                               style: theme.textTheme.labelLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -186,13 +186,13 @@ class _MyOrderViewState extends State<MyOrderView> {
                             Text(
                               'Table:',
                               style: theme.textTheme.labelLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                             ),
                             Text(
                               foodData['tableNo'],
                               style: theme.textTheme.labelLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                               ),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -209,7 +209,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                             Text(
                               'Total:',
                               style: theme.textTheme.bodyLarge!.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

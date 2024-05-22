@@ -33,10 +33,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -65,4 +62,14 @@ class DefaultFirebaseOptions {
     storageBucket: 'foodieshaven-1d7e3.appspot.com',
     iosBundleId: 'com.example.foodiesHaven',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyD3i4hFEN4lkef6viSW7UV-2YRGRmwlSDY',
+    appId: '1:87358368284:web:0e544e886ce75ea8f64dd9',
+    messagingSenderId: '87358368284',
+    projectId: 'foodieshaven-1d7e3',
+    authDomain: 'foodieshaven-1d7e3.firebaseapp.com',
+    storageBucket: 'foodieshaven-1d7e3.appspot.com',
+  );
+
 }

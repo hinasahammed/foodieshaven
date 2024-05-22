@@ -16,7 +16,7 @@ class CheckoutRowSession extends StatelessWidget {
         Text(
           title,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         SizedBox(
@@ -24,7 +24,7 @@ class CheckoutRowSession extends StatelessWidget {
           child: Text(
             name,
             style: theme.textTheme.labelLarge!.copyWith(
-              color: theme.colorScheme.onBackground,
+              color: theme.colorScheme.onSurface,
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,

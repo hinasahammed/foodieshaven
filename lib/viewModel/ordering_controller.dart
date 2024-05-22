@@ -70,13 +70,13 @@ class OrderingController extends GetxController {
         title: Text(
           'Confirm your Order',
           style: theme.textTheme.titleLarge!.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         content: Text(
           'Are you sure you want to order?',
           style: theme.textTheme.titleSmall!.copyWith(
-            color: theme.colorScheme.onBackground,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         actions: <Widget>[
@@ -121,7 +121,7 @@ class OrderingController extends GetxController {
             Text(
               'Your order is successfully.',
               style: theme.textTheme.titleLarge!.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
               ),
               textAlign: TextAlign.center,
             ),
@@ -134,7 +134,7 @@ class OrderingController extends GetxController {
               Text(
                 'You can find the delivery in "My order" session',
                 style: theme.textTheme.titleSmall!.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,
               ),

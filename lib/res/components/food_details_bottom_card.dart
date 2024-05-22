@@ -69,7 +69,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
           decoration: BoxDecoration(
             color: theme.colorScheme.secondaryContainer.withOpacity(.25),
             border: Border.all(
-              color: theme.colorScheme.onBackground.withOpacity(.2),
+              color: theme.colorScheme.onSurface.withOpacity(.2),
             ),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -90,7 +90,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                       Icons.arrow_back_ios,
                       size: 25,
                     ),
-                    color: theme.colorScheme.onBackground,
+                    color: theme.colorScheme.onSurface,
                   ),
                   StreamBuilder(
                     stream: FirebaseFirestore.instance
@@ -129,7 +129,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                         ),
                         color: snapshot.data!.docs.isNotEmpty
                             ? Colors.red
-                            : theme.colorScheme.onBackground,
+                            : theme.colorScheme.onSurface,
                       );
                     },
                   ),
@@ -144,7 +144,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                     child: Text(
                       widget.title[0].toUpperCase() + widget.title.substring(1),
                       style: theme.textTheme.titleLarge!.copyWith(
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -194,7 +194,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
               Text(
                 'Discription',
                 style: theme.textTheme.bodyLarge!.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -237,7 +237,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                     () => Text(
                       orderController.count.value.toString(),
                       style: theme.textTheme.titleLarge!.copyWith(
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -313,7 +313,7 @@ class _FoodDetailsBottomCardState extends State<FoodDetailsBottomCard> {
                       label: Text(
                         'Checkout',
                         style: theme.textTheme.bodyLarge!.copyWith(
-                          color: theme.colorScheme.onBackground,
+                          color: theme.colorScheme.onSurface,
                         ),
                       ),
                     ),

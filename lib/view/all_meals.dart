@@ -40,7 +40,7 @@ class _AllMealsState extends State<AllMeals> {
               child: Text(
                 'No data found!',
                 style: theme.textTheme.titleLarge!.copyWith(
-                  color: theme.colorScheme.onBackground,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
             );
@@ -113,7 +113,7 @@ class _AllMealsState extends State<AllMeals> {
                                                 .substring(1),
                                         style:
                                             theme.textTheme.bodyLarge!.copyWith(
-                                          color: theme.colorScheme.onBackground,
+                                          color: theme.colorScheme.onSurface,
                                           fontWeight: FontWeight.bold,
                                         ),
                                         maxLines: 2,
@@ -136,7 +136,7 @@ class _AllMealsState extends State<AllMeals> {
                                       '(50)Reviews',
                                       style:
                                           theme.textTheme.labelSmall!.copyWith(
-                                        color: theme.colorScheme.onBackground
+                                        color: theme.colorScheme.onSurface
                                             .withOpacity(.4),
                                       ),
                                       textAlign: TextAlign.center,

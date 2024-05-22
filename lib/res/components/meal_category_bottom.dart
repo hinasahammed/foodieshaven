@@ -42,7 +42,7 @@ class _MealCategoryBottomState extends State<MealCategoryBottom> {
             child: Text(
               'No data found!',
               style: theme.textTheme.titleLarge!.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
               ),
             ),
           );
@@ -102,7 +102,7 @@ class _MealCategoryBottomState extends State<MealCategoryBottom> {
                                 foodData['title'][0].toString().toUpperCase() +
                                     foodData['title'].toString().substring(1),
                                 style: theme.textTheme.bodyLarge!.copyWith(
-                                  color: theme.colorScheme.onBackground,
+                                  color: theme.colorScheme.onSurface,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 textAlign: TextAlign.center,

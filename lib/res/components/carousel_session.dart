@@ -28,7 +28,7 @@ class CarouselSession extends StatelessWidget {
                 child: Text(
                   'No special food',
                   style: theme.textTheme.titleLarge!.copyWith(
-                    color: theme.colorScheme.onBackground,
+                    color: theme.colorScheme.onSurface,
                   ),
                 ),
               )

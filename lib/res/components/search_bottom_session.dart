@@ -113,7 +113,7 @@ class _SearchBottomSessionState extends State<SearchBottomSession> {
                                               .substring(1),
                                       style:
                                           theme.textTheme.bodyLarge!.copyWith(
-                                        color: theme.colorScheme.onBackground,
+                                        color: theme.colorScheme.onSurface,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       maxLines: 2,
@@ -134,7 +134,7 @@ class _SearchBottomSessionState extends State<SearchBottomSession> {
                                   Text(
                                     '(50)Reviews',
                                     style: theme.textTheme.labelSmall!.copyWith(
-                                      color: theme.colorScheme.onBackground
+                                      color: theme.colorScheme.onSurface
                                           .withOpacity(.4),
                                     ),
                                     textAlign: TextAlign.center,

@@ -39,7 +39,7 @@ class _EditProfileState extends State<EditProfile> {
             Text(
               'Edit your Profile',
               style: theme.textTheme.titleLarge!.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
                 fontWeight: FontWeight.bold,
               ),
             ),

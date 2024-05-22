@@ -71,7 +71,7 @@ class _GetStartedState extends State<GetStarted> {
                     child: Text(
                       'Skip',
                       style: theme.textTheme.bodyLarge!.copyWith(
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                   ),

@@ -46,7 +46,7 @@ class _CircularProgressContainerState extends State<CircularProgressContainer> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color:
-                  theme.colorScheme.onBackground, // Change the color as needed
+                  theme.colorScheme.onSurface, // Change the color as needed
             ),
             child: Center(
               child: Icon(

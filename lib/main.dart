@@ -6,21 +6,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-// final darkTheme = ThemeData(
-//   brightness: Brightness.dark,
-//   colorScheme: const ColorScheme.dark(
-//     primary: Color(0xff008000),
-//   ),
-//   useMaterial3: true,
-// );
-// final lightTheme = ThemeData(
-//   brightness: Brightness.light,
-//   colorScheme: const ColorScheme.light(
-//     primary: Color(0xff008000),
-//   ),
-//   useMaterial3: true,
-//   textTheme: GoogleFonts.robotoMonoTextTheme(),
-// );
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

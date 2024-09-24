@@ -41,14 +41,14 @@ dependencies:
   get: ^4.6.6
   lottie: ^3.1.2
   image_picker: ^1.1.1
-  firebase_core: ^2.31.1
-  cloud_firestore: ^4.17.4
-  firebase_auth: ^4.19.6
-  firebase_storage: ^11.7.6
+  firebase_core: ^3.5.0
+  cloud_firestore: ^5.4.2
+  firebase_auth: ^5.3.0
+  firebase_storage: ^12.3.1
   intl: ^0.19.0
   cached_network_image: ^3.3.1
   shimmer: ^3.0.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   flutter_rating_bar: ^4.0.1
   google_nav_bar: ^5.0.6
   uuid: ^4.4.0
@@ -58,7 +58,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.13.1"
+  flutter_launcher_icons: ^0.14.0
   flutter_lints: ^4.0.0
 
 flutter_launcher_icons:
